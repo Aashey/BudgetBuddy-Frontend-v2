@@ -8,6 +8,7 @@ const ExcelExport = ({
   checkedList,
   filteredData,
   data,
+  fileName,
 }) => {
   const handleExport = () => {
     if (!error) {
@@ -31,7 +32,7 @@ const ExcelExport = ({
         }
       );
 
-      exportToExcel(dataToExport, "income_category.xlsx");
+      exportToExcel(dataToExport, `${fileName}.xlsx`);
     } else {
       message.error("Failed to export.");
     }

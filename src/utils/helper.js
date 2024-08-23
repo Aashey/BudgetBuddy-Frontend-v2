@@ -50,3 +50,25 @@ export const percentageConversion = (num1, num2) => {
   const res1 = num1 / num2;
   return (100 / res1).toFixed(2);
 };
+
+export const getToday = () => {
+  const today = dayjs().format("YYYY-MM-DD");
+  return { from_date: today, to_date: today };
+};
+
+export const getYesterday = () => {
+  const yesterday = dayjs().subtract(1, "day").format("YYYY-MM-DD");
+  return { from_date: yesterday, to_date: yesterday };
+};
+
+export const getThisWeek = () => {
+  const startOfWeek = dayjs().startOf("week").format("YYYY-MM-DD");
+  const endOfWeek = dayjs().endOf("week").format("YYYY-MM-DD");
+  return { from_date: startOfWeek, to_date: endOfWeek };
+};
+
+export const getThisMonth = () => {
+  const startOfMonth = dayjs().startOf("month").format("YYYY-MM-DD");
+  const endOfMonth = dayjs().endOf("month").format("YYYY-MM-DD");
+  return { from_date: startOfMonth, to_date: endOfMonth };
+};

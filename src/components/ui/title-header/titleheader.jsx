@@ -7,10 +7,10 @@ const TitleHeader = ({ headerProps }) => {
   const { mode: theme } = useSelector((state) => state.theme);
   const { Title, Text } = Typography;
   return (
-    <Card
-      style={{
-        backgroundColor: `${theme === "light" ? "#EDEDFA" : ""}`,
-      }}
+    <div
+    // style={{
+    //   backgroundColor: `${theme === "light" ? "#EDEDFA" : ""}`,
+    // }}
     >
       <div className="flex justify-between items-center rounded-none shadow-transparent">
         <span className="flex flex-col">
@@ -38,7 +38,7 @@ const TitleHeader = ({ headerProps }) => {
           Add
         </Button>
       </div>
-    </Card>
+    </div>
   );
 };
 

@@ -19,6 +19,14 @@ export const darkModeToken = {
       colorBgContainer: "#292a3f",
       colorTextDisabled: "#ffffff",
     },
+    Select: {
+      colorBgContainer: "#292a3f",
+      colorTextDisabled: "#ffffff",
+    },
+    InputNumber: {
+      colorBgContainer: "#292a3f",
+      colorTextDisabled: "#ffffff",
+    },
     Table: {
       lineHeight: 1,
       cellPaddingInline: 12,
@@ -30,6 +38,11 @@ export const darkModeToken = {
     Card: {
       padding: 4,
       paddingLG: 12,
+    },
+    DatePicker: {
+      colorText: "#ffffff",
+      colorBgContainer: "#292a3f",
+      colorTextDisabled: "#ffffff",
     },
   },
 };

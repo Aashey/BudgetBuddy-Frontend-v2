@@ -13,7 +13,7 @@ import {
 } from "antd";
 import { useSelector } from "react-redux";
 import { CategorySetupForm } from "../index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActionGroup from "../../actiongroup/index";
 import { useIncomeCategory } from "../../../services/category/income/useIncomeCategory";
 import TitleHeader from "../../ui/title-header/titleheader";
@@ -21,9 +21,19 @@ import TitleHeader from "../../ui/title-header/titleheader";
 import ColumnMenu from "../../ui/column-menu/column-menu";
 import ExcelExport from "../../excel-exporter";
 import { CustomSearchWithTitle } from "../../search/custom-search";
-import { disableAfterToday, disablePrevMonth } from "../../../utils/helper";
+import { TbSettingsSearch } from "react-icons/tb";
+import dayjs from "dayjs";
+import {
+  disableAfterToday,
+  getThisMonth,
+  getThisWeek,
+  getToday,
+} from "../../../utils/helper";
+import FilterDate from "../../ui/filter";
 
 const IncomeCategory = () => {
+  const [filter, setFilter] = useState(getThisMonth());
+
   const [tablePagination, setTablePagination] = useState({
     current: 1,
     pageSize: 10,
@@ -74,7 +84,7 @@ const IncomeCategory = () => {
     },
   ];
 
-  const { data, isLoading, refetch, error } = useIncomeCategory();
+  const { data, isLoading, refetch, error } = useIncomeCategory(filter);
 
   const { mode: theme } = useSelector((state) => state.theme);
 
@@ -130,17 +140,9 @@ const IncomeCategory = () => {
     setMode("delete");
   };
 
-  const [filter, setFilter] = useState();
-  const [selectedFilter, setSelectedFilter] = useState();
-
-  const filterOptions = [
-    { label: "Today", value: "today" },
-    { label: "This Week", value: "this_week" },
-    { label: "This Month", value: "this_month" },
-    { label: "Period", value: "period" },
-  ];
-
-  console.log(selectedFilter);
+  useEffect(() => {
+    refetch();
+  }, [filter, refetch]);
 
   return (
     <>
@@ -151,37 +153,25 @@ const IncomeCategory = () => {
           method: "category",
           setMode,
           openDrawer,
+          setFilter,
         }}
       />
-
-      <Select
-        placeholder="Filter"
-        className="w-[150px]"
-        onChange={(value) => {
-          setSelectedFilter(value);
-        }}
-        options={filterOptions}
-        defaultValue={"today"}
-      />
-      {selectedFilter === "period" && (
-        <span className="mt-4">
-          From:
-          <DatePicker disabledDate={disableAfterToday} />
-          To:
-          <DatePicker disabledDate={disablePrevMonth} />
-        </span>
-      )}
 
       {/* Mid Section  */}
 
       <span className="flex justify-between items-center mt-4 mb-4">
-        <CustomSearchWithTitle
-          data={data}
-          setFilteredData={setFilteredData}
-          searchName={"title"}
-        />
+        <span className="flex justify-between gap-4">
+          <CustomSearchWithTitle
+            data={data}
+            setFilteredData={setFilteredData}
+            searchName={"title"}
+          />
+          <FilterDate setFilter={setFilter} />
+        </span>
+
         <span className="flex justify-between items-center gap-4">
           <ExcelExport
+            fileName="income_category"
             error={error}
             columnName={incomeCategoryColumn}
             checkedList={checkedList}
@@ -208,7 +198,7 @@ const IncomeCategory = () => {
             pageSize: tablePagination.pageSize,
           }}
           scroll={{
-            y: 250,
+            y: 280,
           }}
           dataSource={!error ? filteredData ?? data?.data?.data : []}
           columns={newColumns}

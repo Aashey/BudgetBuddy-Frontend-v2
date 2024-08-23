@@ -25,13 +25,13 @@ export const CustomSearchWithTitle = ({ setFilteredData, data }) => {
   );
 };
 
-export const CustomSearchWithType = ({ setFilteredData, data }) => {
+export const CustomSearchWithCategory = ({ setFilteredData, data }) => {
   const handleSearch = (value) => {
     console.log(value);
     const formattedKeySearch = value.toLowerCase();
     console.log(data?.data?.data);
     const searchData = data?.data?.data.filter((item) =>
-      item.transaction_type.toLowerCase().includes(formattedKeySearch)
+      item.category_title.toLowerCase().includes(formattedKeySearch)
     );
     setFilteredData(searchData);
   };

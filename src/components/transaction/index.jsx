@@ -1,7 +1,7 @@
-import IncomeTransaction from "./income";
-import ExpenseTransaction from "./expense";
-import SavingTransaction from "./saving";
-import WithdrawTransaction from "./withdraw";
+import IncomeTransaction from "./income/income";
+import ExpenseTransaction from "./expense/expense";
+import SavingTransaction from "./saving/saving";
+import WithdrawTransaction from "./withdraw/withdraw";
 import TransactionHistory from "./transaction-history";
 
 export {

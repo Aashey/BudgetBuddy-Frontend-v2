@@ -1,15 +1,21 @@
 import { useMutation, useQuery } from "react-query";
 import { apiClient } from "../../api/apiClient";
 
-const getIncomeCategory = async ({ filter }) => {
-  const url = `/setup/income-category${filter ? `?${filter}` : ""}`;
+const getIncomeCategory = async ({ queryKey }) => {
+  const [, filter] = queryKey;
+  const filterRange = filter
+    ? `?${`from_date=${filter.from_date}&to_date=${filter.to_date}`}`
+    : "";
+  console.log("CHECK", filterRange);
+  const url = `/setup/income-category${filterRange}`;
   return await apiClient.get(url);
 };
 
-export const useIncomeCategory = (filter = "") => {
+export const useIncomeCategory = (filter) => {
   return useQuery(["getIncomeCategory", filter], getIncomeCategory, {
     refetchOnWindowFocus: false,
     retry: 1,
+    keepPreviousData: true,
   });
 };
 

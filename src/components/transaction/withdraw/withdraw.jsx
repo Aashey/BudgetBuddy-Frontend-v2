@@ -1,65 +1,58 @@
-import {
-  Button,
-  Card,
-  Checkbox,
-  DatePicker,
-  Dropdown,
-  Input,
-  Menu,
-  message,
-  Select,
-  Switch,
-  Table,
-} from "antd";
+import { Card, message, Switch, Table } from "antd";
 import { useSelector } from "react-redux";
-import { CategorySetupForm } from "../index";
 import { useEffect, useState } from "react";
 import ActionGroup from "../../actiongroup/index";
-import { useExpenseCategory } from "../../../services/category/Expense/useExpenseCategory";
 import TitleHeader from "../../ui/title-header/titleheader";
 
 import ColumnMenu from "../../ui/column-menu/column-menu";
 import ExcelExport from "../../excel-exporter";
-import { CustomSearchWithTitle } from "../../search/custom-search";
-import { getToday } from "../../../utils/helper";
+import { CustomSearchWithCategory } from "../../search/custom-search";
+import { formatDate, getThisMonth } from "../../../utils/helper";
 import FilterDate from "../../ui/filter";
+import TransactionSetupForm from "../transaction-setup-form/transaction-setup-form";
+import {
+  useDeleteWithdrawTransaction,
+  useWithdrawTransaction,
+} from "../../../services/transaction/withdraw/useWithdrawTransaction";
 
-const ExpenseCategory = () => {
-  const [filter, setFilter] = useState(getToday());
+const WithdrawTransaction = () => {
+  const [filter, setFilter] = useState(getThisMonth());
 
   const [tablePagination, setTablePagination] = useState({
     current: 1,
     pageSize: 10,
   });
 
-  const expenseCategoryColumn = [
+  const withdrawTransactionColumn = [
     {
       title: "S.N.",
       key: "sn",
-      width: 50,
+      width: 80,
       render: (text, record, index) => {
         const { current, pageSize } = tablePagination;
         return (current - 1) * pageSize + index + 1;
       },
     },
     {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      render: (date) => {
+        return formatDate(date);
+      },
+      width: 150,
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+      width: 150,
+    },
+    {
+      title: "Notes",
+      dataIndex: "notes",
+      key: "notes",
       width: 200,
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-      width: 300,
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (isActive) => <Switch size="small" value={isActive} />,
-      width: 100,
     },
     {
       title: "Action",
@@ -77,7 +70,10 @@ const ExpenseCategory = () => {
     },
   ];
 
-  const { data, isLoading, refetch, error } = useExpenseCategory(filter);
+  const { data, isLoading, refetch, error } = useWithdrawTransaction(filter);
+  const deleteWithdrawTransaction = useDeleteWithdrawTransaction();
+
+  console.log("tran", data);
 
   const { mode: theme } = useSelector((state) => state.theme);
 
@@ -93,15 +89,15 @@ const ExpenseCategory = () => {
   const closeDrawer = () => {
     setIsDrawerOpen(false);
   };
-  const defaultCheckedList = expenseCategoryColumn.map((item) => item.key);
+  const defaultCheckedList = withdrawTransactionColumn.map((item) => item.key);
   const [checkedList, setCheckedList] = useState(defaultCheckedList);
 
-  const columnOptions = expenseCategoryColumn.map(({ key, title }) => ({
+  const columnOptions = withdrawTransactionColumn.map(({ key, title }) => ({
     label: title,
     value: key,
   }));
 
-  const newColumns = expenseCategoryColumn.map((item) => ({
+  const newColumns = withdrawTransactionColumn.map((item) => ({
     ...item,
     hidden: !checkedList.includes(item.key),
   }));
@@ -129,8 +125,21 @@ const ExpenseCategory = () => {
     setSelectedRecord(record);
     openDrawer();
   };
-  const handleDelete = () => {
-    setMode("delete");
+  const handleDelete = (record) => {
+    const id = record.id;
+    console.log(record.id);
+    deleteWithdrawTransaction.mutate(
+      { id },
+      {
+        onSuccess: () => {
+          message.success("Transaction deleted successfully!");
+          refetch();
+        },
+        onError: () => {
+          message.error("Failed to delete transaction!");
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -142,8 +151,8 @@ const ExpenseCategory = () => {
       {/* Top Section  */}
       <TitleHeader
         headerProps={{
-          type: "Expense",
-          method: "category",
+          type: "withdraw",
+          method: "transaction",
           setMode,
           openDrawer,
           setFilter,
@@ -154,7 +163,7 @@ const ExpenseCategory = () => {
 
       <span className="flex justify-between items-center mt-4 mb-4">
         <span className="flex justify-between gap-4">
-          <CustomSearchWithTitle
+          <CustomSearchWithCategory
             data={data}
             setFilteredData={setFilteredData}
             searchName={"title"}
@@ -164,9 +173,9 @@ const ExpenseCategory = () => {
 
         <span className="flex justify-between items-center gap-4">
           <ExcelExport
-            fileName="expense_category"
+            fileName="withdraw_transaction"
             error={error}
-            columnName={expenseCategoryColumn}
+            columnName={withdrawTransactionColumn}
             checkedList={checkedList}
             filteredData={filteredData}
             data={data}
@@ -199,8 +208,8 @@ const ExpenseCategory = () => {
       </Card>
 
       {/* Drawer  */}
-      <CategorySetupForm
-        type="expense"
+      <TransactionSetupForm
+        type="withdraw"
         mode={mode}
         onClose={closeDrawer}
         isDrawerOpen={isDrawerOpen}
@@ -211,4 +220,4 @@ const ExpenseCategory = () => {
   );
 };
 
-export default ExpenseCategory;
+export default WithdrawTransaction;

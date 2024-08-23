@@ -15,6 +15,10 @@ import {
   useCreateIncomeCategory,
   useUpdateIncomeCategory,
 } from "../../../services/category/income/useIncomeCategory";
+import {
+  useCreateExpenseCategory,
+  useUpdateExpenseCategory,
+} from "../../../services/category/expense/useExpenseCategory";
 import { useEffect, useState } from "react";
 import { customMutation } from "../../../services/customMutation";
 
@@ -28,6 +32,8 @@ const CategorySetupForm = ({
 }) => {
   const createIncomeCategory = useCreateIncomeCategory();
   const updateIncomeCategory = useUpdateIncomeCategory();
+  const createExpenseCategory = useCreateExpenseCategory();
+  const updateExpenseCategory = useUpdateExpenseCategory();
   const { mode: theme } = useSelector((state) => state.theme);
   const [form] = Form.useForm();
   const { Title, Text } = Typography;
@@ -59,10 +65,10 @@ const CategorySetupForm = ({
         create: createIncomeCategory,
         update: updateIncomeCategory,
       },
-      // expense: {
-      //   create: createExpenseCategory,
-      //   update: updateExpenseCategory,
-      // },
+      expense: {
+        create: createExpenseCategory,
+        update: updateExpenseCategory,
+      },
     };
 
     const currentCategory = categoryMap[type][mode];
@@ -93,11 +99,11 @@ const CategorySetupForm = ({
           backgroundColor: `${theme === "light" ? "#ffffff" : "#202131"}`,
         }}
         title={
-          !mode === "view"
+          mode !== "view"
             ? `${capitalizeInitialChar(mode)} ${capitalizeInitialChar(
                 type
               )} Category`
-            : "Income Category"
+            : `${capitalizeInitialChar(type)} Category`
         }
         width="30vw"
         open={isDrawerOpen}

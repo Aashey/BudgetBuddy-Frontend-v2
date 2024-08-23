@@ -11,6 +11,15 @@ export const lightModeToken = {
     Input: {
       colorTextDisabled: "#000000",
     },
+    Select: {
+      colorTextDisabled: "#000000",
+    },
+    InputNumber: {
+      colorTextDisabled: "#000000",
+    },
+    DatePicker: {
+      colorTextDisabled: "#000000",
+    },
     Table: {
       headerBg: "#ededfa",
       lineHeight: 1,
