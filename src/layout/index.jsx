@@ -23,13 +23,11 @@ const CustomLayout = () => {
               <div
                 style={{
                   backgroundColor: `${
-                    mode === "light" ? "#ffffff" : "#181925"
+                    mode === "light" ? "#f7f8fa" : "#181925"
                   }`,
                 }}
                 className="m-auto w-full h-full px-6"
               >
-                {/* <Breadcrumb /> */}
-
                 <Outlet />
               </div>
             </Content>

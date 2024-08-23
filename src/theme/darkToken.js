@@ -12,6 +12,9 @@ export const darkModeToken = {
   colorError: "#cf0955",
   colorSuccess: "#07f00f",
   components: {
+    Token: {
+      colorBgSpotlight: "#202131",
+    },
     Input: {
       colorBgContainer: "#292a3f",
       colorTextDisabled: "#ffffff",

@@ -16,7 +16,7 @@ const App = () => {
   };
 
   const bgStyle = {
-    backgroundColor: mode === "light" ? "#ffffff" : "#181925",
+    backgroundColor: mode === "light" ? "#ecf0f1" : "#181925",
   };
 
   const queryClient = new QueryClient();

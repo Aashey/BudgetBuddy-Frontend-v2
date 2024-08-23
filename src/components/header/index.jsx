@@ -15,9 +15,10 @@ const Header = () => {
     <>
       <div
         style={{
-          backgroundColor: `${mode === "light" ? "#ffffff" : "#181925"}`,
+          backgroundColor: `${mode === "light" ? "#f7f8fa" : "#181925"}`,
           position: "sticky",
           top: 0,
+          zIndex: 10,
         }}
         className="flex px-6 py-2"
       >
