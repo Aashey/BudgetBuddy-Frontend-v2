@@ -2,10 +2,12 @@ import {
   Button,
   Card,
   Checkbox,
+  DatePicker,
   Dropdown,
   Input,
   Menu,
   message,
+  Select,
   Switch,
   Table,
 } from "antd";
@@ -19,10 +21,9 @@ import TitleHeader from "../../ui/title-header/titleheader";
 import ColumnMenu from "../../ui/column-menu/column-menu";
 import ExcelExport from "../../excel-exporter";
 import { CustomSearchWithTitle } from "../../search/custom-search";
+import { disableAfterToday, disablePrevMonth } from "../../../utils/helper";
 
 const IncomeCategory = () => {
-  // const [filter, setFilter] = useState("");
-
   const [tablePagination, setTablePagination] = useState({
     current: 1,
     pageSize: 10,
@@ -129,6 +130,18 @@ const IncomeCategory = () => {
     setMode("delete");
   };
 
+  const [filter, setFilter] = useState();
+  const [selectedFilter, setSelectedFilter] = useState();
+
+  const filterOptions = [
+    { label: "Today", value: "today" },
+    { label: "This Week", value: "this_week" },
+    { label: "This Month", value: "this_month" },
+    { label: "Period", value: "period" },
+  ];
+
+  console.log(selectedFilter);
+
   return (
     <>
       {/* Top Section  */}
@@ -140,6 +153,24 @@ const IncomeCategory = () => {
           openDrawer,
         }}
       />
+
+      <Select
+        placeholder="Filter"
+        className="w-[150px]"
+        onChange={(value) => {
+          setSelectedFilter(value);
+        }}
+        options={filterOptions}
+        defaultValue={"today"}
+      />
+      {selectedFilter === "period" && (
+        <span className="mt-4">
+          From:
+          <DatePicker disabledDate={disableAfterToday} />
+          To:
+          <DatePicker disabledDate={disablePrevMonth} />
+        </span>
+      )}
 
       {/* Mid Section  */}
 

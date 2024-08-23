@@ -3,8 +3,12 @@ import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 import { MdOutlineSavings } from "react-icons/md";
 import { useGetTotalData } from "../../services/dashboard/useTotalData";
-import { Card, Skeleton, Table } from "antd";
-import { percentageConversion } from "../../utils/helper";
+import { Card, Skeleton, Table, Tag } from "antd";
+import {
+  formatDate,
+  formatDate_WithMonth,
+  percentageConversion,
+} from "../../utils/helper";
 import { DashboardIVECharts, DashboardIVEPIECharts } from "./charts/charts";
 import Title from "antd/es/typography/Title";
 import { useGetTransaction } from "../../services/transaction/useTransactionHistory";
@@ -18,6 +22,12 @@ const Dashboard = () => {
 
   const recentTransactions = transactionHistoryData?.data.slice(0, 5);
 
+  const tagColor = {
+    Income: "#3498db",
+    Expense: "#e74c3c",
+    Saving: "#f39c12",
+    Withdraw: "#8854d0",
+  };
   const transactionColumns = [
     {
       title: "S.N.",
@@ -29,11 +39,26 @@ const Dashboard = () => {
       title: "Date",
       dataIndex: "created_at",
       key: "created_at",
+      render: (text) => {
+        return formatDate(text);
+      },
     },
     {
       title: "Transaction Type",
       dataIndex: "transaction_type",
       key: "transaction_type",
+      render: (text) => {
+        return (
+          <Tag
+            className="size-6 text-white w-[60px] flex justify-center items-center"
+            style={{
+              backgroundColor: tagColor[text],
+            }}
+          >
+            {text}
+          </Tag>
+        );
+      },
     },
     {
       title: "Amount",
