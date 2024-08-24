@@ -3,7 +3,7 @@ import { apiClient } from "../api/apiClient";
 
 const getBalanceData = async () => {
   const response = await apiClient.get("analytics/balance");
-  return response?.data;
+  return response.data;
 };
 
 export const useBalanceData = () => {

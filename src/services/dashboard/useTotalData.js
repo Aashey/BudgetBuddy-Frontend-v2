@@ -3,7 +3,7 @@ import { apiClient } from "../api/apiClient";
 
 const getTotalData = async () => {
   const response = await apiClient.get("/dashboard/overview");
-  return response?.data;
+  return response.data;
 };
 
 export const useGetTotalData = () => {
