@@ -1,8 +1,11 @@
-import { Card, Switch, Table } from "antd";
+import { Card, notification, Switch, Table } from "antd";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ActionGroup from "../../actiongroup/index";
-import { useExpenseTransaction } from "../../../services/transaction/expense/useExpenseTransaction";
+import {
+  useDeleteExpenseTransaction,
+  useExpenseTransaction,
+} from "../../../services/transaction/expense/useExpenseTransaction";
 import TitleHeader from "../../ui/title-header/titleheader";
 
 import ColumnMenu from "../../ui/column-menu/column-menu";
@@ -72,7 +75,7 @@ const ExpenseTransaction = () => {
           handleEditComponent={handleEditComponent}
           handleDelete={handleDelete}
           handleViewComponent={handleViewComponent}
-          method="category"
+          method="transaction"
         />
       ),
       width: 100,
@@ -81,8 +84,7 @@ const ExpenseTransaction = () => {
   ];
 
   const { data, isLoading, refetch, error } = useExpenseTransaction(filter);
-
-  console.log("tran", data);
+  const deleteExpenseTransaction = useDeleteExpenseTransaction();
 
   const { mode: theme } = useSelector((state) => state.theme);
 
@@ -134,8 +136,27 @@ const ExpenseTransaction = () => {
     setSelectedRecord(record);
     openDrawer();
   };
-  const handleDelete = () => {
-    setMode("delete");
+  const handleDelete = (record) => {
+    const id = record.id;
+    console.log(record.id);
+    deleteExpenseTransaction.mutate(
+      { id },
+      {
+        onSuccess: () => {
+          notification.success({
+            message: "Deleted Successfully.",
+            description: "Transaction deleted successfully.",
+          });
+          refetch();
+        },
+        onError: () => {
+          notification.success({
+            message: "Failed to deleted.",
+            description: "Failed to delete transaction.",
+          });
+        },
+      }
+    );
   };
 
   useEffect(() => {

@@ -9,11 +9,12 @@ import {
 } from "antd";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../features/auth/authActions";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const { Title, Text, Link } = Typography;
   const { isAuthenticated, loading, error } = useSelector(
@@ -27,6 +28,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      navigate("/dashboard");
       notification.success({
         message: "Login Successful.",
         description: "You have been logged in successfully.",

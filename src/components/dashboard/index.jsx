@@ -13,7 +13,7 @@ import { DashboardIVECharts, DashboardIVEPIECharts } from "./charts/charts";
 import Title from "antd/es/typography/Title";
 import { useGetTransaction } from "../../services/transaction/useTransactionHistory";
 const Dashboard = () => {
-  const { data: dashboardData, loading, error } = useGetTotalData();
+  const { data: dashboardData, isLoading, isError } = useGetTotalData();
   const {
     data: transactionHistoryData,
     loading: transactionLoading,
@@ -130,7 +130,7 @@ const Dashboard = () => {
     <>
       {/* Top Dashboard Cards  */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {loading ? (
+        {isLoading ? (
           <Skeleton />
         ) : (
           <>

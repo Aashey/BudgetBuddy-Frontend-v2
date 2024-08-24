@@ -28,7 +28,7 @@ const FilterDate = ({ setFilter }) => {
   ];
 
   const handleFilter = () => {
-    generateLoading(true);
+    setGenerateLoading(true);
     const filterMap = {
       today: getToday(),
       this_week: getThisWeek(),
@@ -38,7 +38,7 @@ const FilterDate = ({ setFilter }) => {
 
     const selectedOption = filterMap[selectedFilter];
     setFilter(selectedOption);
-    generateLoading(false);
+    setGenerateLoading(false);
   };
   return (
     <div>

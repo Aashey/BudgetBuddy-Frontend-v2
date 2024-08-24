@@ -7,7 +7,7 @@ import TitleHeader from "../../ui/title-header/titleheader";
 
 import ColumnMenu from "../../ui/column-menu/column-menu";
 import ExcelExport from "../../excel-exporter";
-import { CustomSearchWithCategory } from "../../search/custom-search";
+
 import { formatDate, getThisMonth } from "../../../utils/helper";
 import FilterDate from "../../ui/filter";
 import TransactionSetupForm from "../transaction-setup-form/transaction-setup-form";
@@ -60,7 +60,7 @@ const SavingTransaction = () => {
           handleEditComponent={handleEditComponent}
           handleDelete={handleDelete}
           handleViewComponent={handleViewComponent}
-          method="category"
+          method="transaction"
         />
       ),
       width: 100,
@@ -159,11 +159,6 @@ const SavingTransaction = () => {
 
       <span className="flex justify-between items-center mt-4 mb-4">
         <span className="flex justify-between gap-4">
-          <CustomSearchWithCategory
-            data={data}
-            setFilteredData={setFilteredData}
-            searchName={"title"}
-          />
           <FilterDate setFilter={setFilter} />
         </span>
 

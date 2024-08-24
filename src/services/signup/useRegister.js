@@ -1,5 +1,5 @@
-import { useMutation } from "react-query";
 import { apiClient } from "../api/apiClient";
+import { useMutation } from "react-query";
 
 const registerUser = async ({
   username,
@@ -7,7 +7,13 @@ const registerUser = async ({
   password,
   password_confirmation,
 }) => {
-  return await apiClient.post("/register", {
+  console.log({
+    username,
+    email,
+    password,
+    password_confirmation,
+  });
+  return await apiClient.post(`/register`, {
     username,
     email,
     password,
@@ -15,13 +21,6 @@ const registerUser = async ({
   });
 };
 
-const onSuccess = () => {
-  console.log("Registered Successfully.");
-};
-const onError = (error) => {
-  console.error("Registeration Failed.", error.response.data.errors);
-};
-
 export const useRegisterUser = () => {
-  return useMutation(registerUser, { onSuccess, onError });
+  return useMutation(registerUser);
 };

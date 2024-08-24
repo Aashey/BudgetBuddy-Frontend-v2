@@ -48,3 +48,27 @@ export const CustomSearchWithCategory = ({ setFilteredData, data }) => {
     </>
   );
 };
+
+export const CustomSearchWithTransaction = ({ setFilteredData, data }) => {
+  const handleSearch = (value) => {
+    console.log(value);
+    const formattedKeySearch = value.toLowerCase();
+    console.log(data?.data);
+    const searchData = data?.data?.filter((item) =>
+      item.transaction_type.toLowerCase().includes(formattedKeySearch)
+    );
+    setFilteredData(searchData);
+  };
+  return (
+    <>
+      <Input
+        allowClear
+        prefix={<CiSearch />}
+        type="search"
+        onChange={(e) => handleSearch(e.target.value)}
+        className="w-[200px]"
+        placeholder="Search"
+      />
+    </>
+  );
+};

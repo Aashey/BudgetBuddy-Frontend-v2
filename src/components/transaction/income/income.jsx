@@ -1,8 +1,11 @@
-import { Card, Switch, Table } from "antd";
+import { Card, message, notification, Switch, Table } from "antd";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ActionGroup from "../../actiongroup/index";
-import { useIncomeTransaction } from "../../../services/transaction/income/useIncomeTransaction";
+import {
+  useDeleteIncomeTransaction,
+  useIncomeTransaction,
+} from "../../../services/transaction/income/useIncomeTransaction";
 import TitleHeader from "../../ui/title-header/titleheader";
 
 import ColumnMenu from "../../ui/column-menu/column-menu";
@@ -72,7 +75,7 @@ const IncomeTransaction = () => {
           handleEditComponent={handleEditComponent}
           handleDelete={handleDelete}
           handleViewComponent={handleViewComponent}
-          method="category"
+          method="transaction"
         />
       ),
       width: 100,
@@ -81,7 +84,7 @@ const IncomeTransaction = () => {
   ];
 
   const { data, isLoading, refetch, error } = useIncomeTransaction(filter);
-
+  const deleteIncomeTransaction = useDeleteIncomeTransaction();
   console.log("tran", data);
 
   const { mode: theme } = useSelector((state) => state.theme);
@@ -134,8 +137,27 @@ const IncomeTransaction = () => {
     setSelectedRecord(record);
     openDrawer();
   };
-  const handleDelete = () => {
-    setMode("delete");
+  const handleDelete = (record) => {
+    const id = record.id;
+    console.log(record.id);
+    deleteIncomeTransaction.mutate(
+      { id },
+      {
+        onSuccess: () => {
+          notification.success({
+            message: "Deleted Successfully.",
+            description: "Transaction deleted successfully.",
+          });
+          refetch();
+        },
+        onError: () => {
+          notification.success({
+            message: "Failed to deleted.",
+            description: "Failed to delete transaction.",
+          });
+        },
+      }
+    );
   };
 
   useEffect(() => {

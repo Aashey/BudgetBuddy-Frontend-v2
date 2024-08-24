@@ -1,4 +1,12 @@
-import { Button, Card, Form, Input, notification, Typography } from "antd";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  message,
+  notification,
+  Typography,
+} from "antd";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRegisterUser } from "../../services/signup/useRegister";
@@ -8,26 +16,22 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const { Title, Text, Link } = Typography;
   const { mode } = useSelector((state) => state.theme);
-  const { mutate: register, isLoading } = useRegisterUser();
+  const { mutate: registerMutation, isLoading } = useRegisterUser();
 
   const onFinish = (values) => {
     console.log(values);
     const { username, email, password, password_confirmation } = values;
-    register(
+    registerMutation(
       { username, email, password, password_confirmation },
       {
         onSuccess: () => {
-          notification.success({
-            message: "Signup Successful.",
-            description: "User has been created successfully.",
-          });
+          message.success("User Registered successfully.");
           navigate("/login");
         },
         onError: (error) => {
-          notification.error({
-            message: "Signup Failed.",
-            description: error || "An error occurred.",
-          });
+          message.error(
+            error.response?.data?.message || "Registration Failed."
+          );
         },
       }
     );

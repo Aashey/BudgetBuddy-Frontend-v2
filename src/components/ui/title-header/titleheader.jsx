@@ -24,7 +24,8 @@ const TitleHeader = ({ headerProps }) => {
             {capitalizeInitialChar(headerProps.method)}
           </Title>
           <Text strong>
-            Manage your {headerProps.type} {headerProps.method}
+            {headerProps.method !== "history" &&
+              `Manage your ${headerProps.type} ${headerProps.method}`}
           </Text>
         </span>
         <Button
