@@ -162,8 +162,8 @@ const Dashboard = () => {
       </div>
 
       {/* Bottom Top 5 transaction datas  */}
-      <div className="mt-4">
-        <Card title={"Recent Transaction"}>
+      <div className="mt-4 mb-4">
+        <Card title={<div className="py-3">Recent Transaction</div>}>
           <Table
             rowKey={"id"}
             columns={transactionColumns}

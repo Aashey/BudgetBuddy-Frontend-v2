@@ -9,6 +9,7 @@ import { NotFoundRoute } from "./404";
 import CustomLayout from "../layout";
 import { CategoryRoutes } from "./category";
 import { TransactionRoutes } from "./transaction";
+import { AnalyticsRoutes } from "./analytics";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ export const routes = createBrowserRouter(
         {NotFoundRoute}
         {CategoryRoutes}
         {TransactionRoutes}
+        {AnalyticsRoutes}
       </Route>
     </>
   )

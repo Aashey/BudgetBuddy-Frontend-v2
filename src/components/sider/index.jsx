@@ -17,8 +17,8 @@ const CustomSider = () => {
       icon: <HiMiniChartPie size={20} />,
     },
     {
-      key: "/category",
-      label: "Category",
+      key: "/categories",
+      label: "Categories",
       icon: <TbCategoryPlus size={20} />,
       children: [
         {
@@ -36,8 +36,8 @@ const CustomSider = () => {
       ],
     },
     {
-      key: "/transaction",
-      label: "Transaction",
+      key: "/transactions",
+      label: "Transactions",
       icon: <MdOutlineAttachMoney size={20} />,
       children: [
         {
@@ -63,17 +63,17 @@ const CustomSider = () => {
       ],
     },
     {
-      key: "/reports",
-      label: "Reports",
+      key: "/analytics",
+      label: "Analytics",
       icon: <TbReportMoney size={20} />,
       children: [
         {
-          key: "/report/income-report",
-          label: <NavLink to="/report/income-report">Income Report</NavLink>,
+          key: "/analytics/balance",
+          label: <NavLink to="/analytics/balance">Balance</NavLink>,
         },
         {
-          key: "/report/expense-report",
-          label: <NavLink to="/report/expense-report">Expense Report</NavLink>,
+          key: "/analytics/cashflow",
+          label: <NavLink to="/analytics/cashflow">Cash Flow</NavLink>,
         },
       ],
     },
