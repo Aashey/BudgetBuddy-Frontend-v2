@@ -46,6 +46,16 @@ export const formatDate_WithMonth = (fullDate) => {
   return date.toLocaleDateString("en-US", options);
 };
 
+export const getMonthName = (monthNumber) => {
+  if (monthNumber >= 1 && monthNumber <= 12) {
+    return dayjs()
+      .month(monthNumber - 1)
+      .format("MMMM");
+  } else {
+    return "Invalid month";
+  }
+};
+
 export const percentageConversion = (num1, num2) => {
   const res1 = num1 / num2;
   return (100 / res1).toFixed(2);
@@ -71,4 +81,28 @@ export const getThisMonth = () => {
   const startOfMonth = dayjs().startOf("month").format("YYYY-MM-DD");
   const endOfMonth = dayjs().endOf("month").format("YYYY-MM-DD");
   return { from_date: startOfMonth, to_date: endOfMonth };
+};
+
+// Function to generate colors dynamically
+export const generateColors = (numColors) => {
+  const baseColors = [
+    "#FF4560",
+    "#00E396",
+    "#008FFB",
+    "#775DD0",
+    "#FEB019",
+    "#FF66C2",
+    "#A397D0",
+    "#7D5BA6",
+    "#3F9C35",
+    "#FFC107",
+    "#E91E63",
+    "#9C27B0",
+  ];
+
+  let colors = [];
+  for (let i = 0; i < numColors; i++) {
+    colors.push(baseColors[i % baseColors.length]);
+  }
+  return colors;
 };

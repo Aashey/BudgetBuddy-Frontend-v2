@@ -28,16 +28,20 @@ const TitleHeader = ({ headerProps }) => {
               `Manage your ${headerProps.type} ${headerProps.method}`}
           </Text>
         </span>
-        <Button
-          onClick={() => {
-            headerProps.openDrawer();
-            headerProps.setMode("create");
-          }}
-          type="primary"
-          icon={<IoMdAddCircle size={18} />}
-        >
-          Add
-        </Button>
+        {headerProps.method !== "history" && (
+          <>
+            <Button
+              onClick={() => {
+                headerProps.openDrawer();
+                headerProps.setMode("create");
+              }}
+              type="primary"
+              icon={<IoMdAddCircle size={18} />}
+            >
+              Add
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

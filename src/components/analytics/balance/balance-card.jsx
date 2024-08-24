@@ -5,12 +5,12 @@ const BalanceCard = ({ title, amount, color }) => {
   const { Title, Text } = Typography;
   return (
     <Card>
-      <span className="flex-1">
+      <span>
         <Title level={3} style={{ color: `${color}` }}>
           {title}
         </Title>
-        <span className="flex flex-col">
-          <Text className="text-lg ">
+        <span>
+          <Text className="text-lg font-semibold">
             {" "}
             Rs. <CountUp duration={0.8} end={amount} />
           </Text>
