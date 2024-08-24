@@ -155,7 +155,7 @@ const CashFlowAnalytics = () => {
         <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {!isLoading && (
             <>
-              <Card>
+              <Card title="Income">
                 <Table
                   rowKey="id"
                   columns={summaryTableColumn}
@@ -164,7 +164,7 @@ const CashFlowAnalytics = () => {
                   isLoading={isLoading}
                 />
               </Card>
-              <Card>
+              <Card title="Expense">
                 <Table
                   rowKey="id"
                   columns={summaryTableColumn}
@@ -183,7 +183,7 @@ const CashFlowAnalytics = () => {
         title={<div className="py-3">Overall Summary</div>}
       >
         <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-          <Card>
+          <Card title="Income">
             <Table
               rowKey={"id"}
               columns={summaryTableColumn}
@@ -192,7 +192,7 @@ const CashFlowAnalytics = () => {
               pagination={false}
             />
           </Card>
-          <Card>
+          <Card title="Expense">
             <Table
               rowKey={"id"}
               columns={summaryTableColumn}
@@ -211,7 +211,7 @@ const CashFlowAnalytics = () => {
         title={<div className="py-3">Total By Month</div>}
       >
         <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-          <Card>
+          <Card title="Income">
             <Table
               rowKey={"id"}
               columns={totalSummaryColumn}
@@ -219,7 +219,7 @@ const CashFlowAnalytics = () => {
               isLoading={isLoading}
             />
           </Card>
-          <Card>
+          <Card title="Expense">
             <Table
               rowKey={"id"}
               columns={totalSummaryColumn}
