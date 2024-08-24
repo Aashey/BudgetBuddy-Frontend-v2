@@ -2,6 +2,7 @@ import { Table } from "antd";
 import { useState } from "react";
 
 const BalanceTable = ({ tableData, isError, isLoading }) => {
+  console.log(tableData);
   const balanceColumn = [
     {
       title: "S.N.",
@@ -37,22 +38,21 @@ const BalanceTable = ({ tableData, isError, isLoading }) => {
       dataIndex: "total_expense",
       key: "total_expense",
     },
-    // {
-    //   title: "Total Saving",
-    //   dataIndex: "saving_balance",
-    //   key: "saving_balance",
-    //   render: (text) => (text === null ? "N/A" : text), // Render null values as 'N/A'
-    // },
+    {
+      title: "Current Saving",
+      dataIndex: "current_saving",
+      key: "current_saving",
+    },
+    {
+      title: "Total Saving",
+      dataIndex: "total_savings",
+      key: "total_savings",
+    },
     {
       title: "Total Withdraw",
       dataIndex: "total_withdraw",
       key: "total_withdraw",
     },
-    // {
-    //   title: "Savings Balance",
-    //   dataIndex: "total_saving",
-    //   key: "total_saving",
-    // },
   ];
   const [tablePagination, setTablePagination] = useState({
     current: 1,

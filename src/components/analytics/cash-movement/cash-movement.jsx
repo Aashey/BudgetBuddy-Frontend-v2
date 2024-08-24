@@ -1,7 +1,6 @@
 import { Card, Table, Typography } from "antd";
 import { formatDate_WithMonth } from "../../../utils/helper";
 import { useCashMovementData } from "../../../services/analytics/useCashMovementData";
-import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import CountUp from "react-countup";
 import CashMovementCharts from "./CashMovementCharts";
 import { useSavingGoal } from "../../../services/transaction/saving/useSavingGoal";
