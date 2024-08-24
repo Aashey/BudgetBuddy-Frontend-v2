@@ -6,9 +6,7 @@ import { useLogout } from "../../features/auth/authAct";
 const Logout = () => {
   const { Link } = Typography;
   const { mutate: logout, isLoading } = useLogout();
-  const { isAuthenticated, expirationTime } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     logout();

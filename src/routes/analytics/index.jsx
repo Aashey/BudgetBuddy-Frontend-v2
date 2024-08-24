@@ -3,6 +3,7 @@ import { ProtectedRoute } from "../protected-public";
 import {
   BalanceAnalytics,
   CashflowAnalytics,
+  CashMovementAnalytics,
 } from "../../components/analytics";
 
 export const AnalyticsRoutes = (
@@ -14,6 +15,10 @@ export const AnalyticsRoutes = (
     <Route
       path="/analytics/cashflow"
       element={<ProtectedRoute element={<CashflowAnalytics />} />}
+    />
+    <Route
+      path="/analytics/cash-movement"
+      element={<ProtectedRoute element={<CashMovementAnalytics />} />}
     />
   </Route>
 );

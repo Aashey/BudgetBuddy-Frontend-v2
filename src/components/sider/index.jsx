@@ -75,6 +75,10 @@ const CustomSider = () => {
           key: "/analytics/cashflow",
           label: <NavLink to="/analytics/cashflow">Cash Flow</NavLink>,
         },
+        {
+          key: "/analytics/cash-movement",
+          label: <NavLink to="/analytics/cash-movement">Cash Movement</NavLink>,
+        },
       ],
     },
   ];
