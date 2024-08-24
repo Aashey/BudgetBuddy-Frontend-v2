@@ -29,8 +29,11 @@ const TransactionHistory = () => {
   const transactionHistoryColumn = [
     {
       title: "S.N.",
-      render: (_, record, index) => {
-        return index + 1;
+      key: "sn",
+      width: 50,
+      render: (text, record, index) => {
+        const { current, pageSize } = tablePagination;
+        return (current - 1) * pageSize + index + 1;
       },
     },
     {
