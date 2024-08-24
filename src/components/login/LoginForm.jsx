@@ -1,46 +1,31 @@
-import {
-  Button,
-  Card,
-  Form,
-  Input,
-  message,
-  notification,
-  Typography,
-} from "antd";
+import { Button, Card, Form, Input, message, Typography } from "antd";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { login } from "../../features/auth/authActions";
+import { useLogin } from "../../features/auth/authAct";
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { mutate: login, isLoading } = useLogin();
   const [form] = Form.useForm();
   const { Title, Text, Link } = Typography;
-  const { isAuthenticated, loading, error } = useSelector(
-    (state) => state.auth
-  );
+
   const { mode } = useSelector((state) => state.theme);
 
   const onFinish = (values) => {
-    dispatch(login({ email: values.email, password: values.password }));
+    login(
+      { email: values.email, password: values.password },
+      {
+        onSuccess: () => {
+          message.success("Login Successful.");
+          navigate("/dashboard");
+        },
+        onError: (error) => {
+          message.error(error || "Login Failed.");
+        },
+      }
+    );
   };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/dashboard");
-      notification.success({
-        message: "Login Successful.",
-        description: "You have been logged in successfully.",
-      });
-    }
-    if (error) {
-      notification.error({
-        message: "Login Failed.",
-        description: error,
-      });
-    }
-  }, [isAuthenticated, error]);
 
   return (
     <div className="flex h-screen">
@@ -104,7 +89,12 @@ const LoginForm = () => {
                 <Input.Password placeholder="Password" />
               </Form.Item>
 
-              <Button block type="primary" htmlType="submit" loading={loading}>
+              <Button
+                block
+                type="primary"
+                htmlType="submit"
+                loading={isLoading}
+              >
                 Login
               </Button>
             </Form>

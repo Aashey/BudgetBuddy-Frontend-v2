@@ -10,6 +10,7 @@ import CustomLayout from "../layout";
 import { CategoryRoutes } from "./category";
 import { TransactionRoutes } from "./transaction";
 import { AnalyticsRoutes } from "./analytics";
+import { UserProfileRoute } from "./profile";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ export const routes = createBrowserRouter(
         {CategoryRoutes}
         {TransactionRoutes}
         {AnalyticsRoutes}
+        {UserProfileRoute}
       </Route>
     </>
   )

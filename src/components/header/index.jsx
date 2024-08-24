@@ -5,6 +5,7 @@ import Logout from "../logout/logout";
 import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import ChangePassword from "../change-password";
 // import { IoEyeSharp } from "react-icons/io5";
 // import { FaEdit, FaUser } from "react-icons/fa";
 // import { CiLogout } from "react-icons/ci";
@@ -39,7 +40,9 @@ const Header = () => {
                       <NavLink to="/profile">View Profile</NavLink>
                     </Menu.Item>
 
-                    <Menu.Item key={"password"}>Change Password</Menu.Item>
+                    <Menu.Item key={"password"}>
+                      <ChangePassword />
+                    </Menu.Item>
 
                     <Menu.Item key={"/logout"}>
                       <Logout />

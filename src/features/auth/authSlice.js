@@ -12,44 +12,22 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(login.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(login.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.token = payload.token;
-        state.expirationTime = payload.expires_at;
-        state.isAuthenticated = true;
-        state.error = null;
-      })
-      .addCase(login.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.isAuthenticated = false;
-        state.error = payload;
-      })
-      .addCase(logout.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.loading = false;
-        state.token = null;
-        state.expirationTime = null;
-        state.isAuthenticated = false;
-        state.error = null;
-      })
-      .addCase(logout.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.isAuthenticated = false;
-        state.error = payload;
-      });
+  reducers: {
+    setAuth(state, action) {
+      state.token = action.payload.token;
+      state.expirationTime = action.payload.expirationTime;
+      state.isAuthenticated = true;
+    },
+    clearAuth(state) {
+      state.token = null;
+      state.expirationTime = null;
+      state.isAuthenticated = false;
+    },
   },
 });
 
-export const selectToken = (state) => state.auth.token; // for headers in interceptor
+export const { setAuth, clearAuth } = authSlice.actions;
+
+export const selectToken = (state) => state.auth.token;
 
 export default authSlice.reducer;

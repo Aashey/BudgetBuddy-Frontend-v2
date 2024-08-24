@@ -1,38 +1,30 @@
-import { Button, notification, Typography } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../features/auth/authActions";
+import { message, notification, Typography } from "antd";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useLogout } from "../../features/auth/authAct";
 
 const Logout = () => {
-  const dispatch = useDispatch();
-  const { isAuthenticated, expirationTime, loading, error } = useSelector(
+  const { Link } = Typography;
+  const { mutate: logout, isLoading } = useLogout();
+  const { isAuthenticated, expirationTime } = useSelector(
     (state) => state.auth
   );
 
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
   };
 
   useEffect(() => {
     if (!isAuthenticated) {
-      notification.success({
-        message: "Logout Successful.",
-        description: "You have been logged out successfully.",
-      });
-      if (error) {
-        notification.error({
-          message: "Logout Failed.",
-          description: error || "An error occured.",
-        });
-      }
+      message.success("Logout Successful.");
     }
-  }, [isAuthenticated, error]);
+  }, [isAuthenticated]);
 
   return (
     <>
-      <Button onClick={handleLogout} loading={loading}>
+      <Link onClick={handleLogout} loading={isLoading}>
         Logout
-      </Button>
+      </Link>
     </>
   );
 };
