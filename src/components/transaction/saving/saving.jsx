@@ -12,6 +12,7 @@ import { formatDate, getThisMonth } from "../../../utils/helper";
 import FilterDate from "../../ui/filter";
 import TransactionSetupForm from "../transaction-setup-form/transaction-setup-form";
 import { useDeleteSavingTransaction } from "../../../services/transaction/saving/useSavingTransaction";
+import SavingGoal from "./saving-goal";
 
 const SavingTransaction = () => {
   const [filter, setFilter] = useState(getThisMonth());
@@ -123,7 +124,6 @@ const SavingTransaction = () => {
   };
   const handleDelete = (record) => {
     const id = record.id;
-    console.log(record.id);
     deleteSavingTransaction.mutate(
       { id },
       {
@@ -163,6 +163,7 @@ const SavingTransaction = () => {
         </span>
 
         <span className="flex justify-between items-center gap-4">
+          <SavingGoal />
           <ExcelExport
             fileName="saving_transaction"
             error={error}

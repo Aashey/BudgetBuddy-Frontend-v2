@@ -64,7 +64,6 @@ const BalanceTable = ({ tableData, isError, isLoading }) => {
       pageSize: pagination.pageSize,
     });
   };
-  console.log("Table", tableData);
   return (
     <div className="custom-font p-4 mb-2">
       <Table

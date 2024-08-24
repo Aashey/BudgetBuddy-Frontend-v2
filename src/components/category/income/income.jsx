@@ -166,7 +166,7 @@ const IncomeCategory = () => {
             setFilteredData={setFilteredData}
             searchName={"title"}
           />
-          <FilterDate setFilter={setFilter} />
+          {/* <FilterDate setFilter={setFilter} /> */}
         </span>
 
         <span className="flex justify-between items-center gap-4">

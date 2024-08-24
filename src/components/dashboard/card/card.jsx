@@ -34,7 +34,7 @@ const DashboardCard = ({
                 ) : (
                   <>
                     <span className="bg-red-600 rounded-3xl px-1 text-white">
-                      -{percentage} %
+                      {percentage} %
                     </span>{" "}
                     since last month
                   </>

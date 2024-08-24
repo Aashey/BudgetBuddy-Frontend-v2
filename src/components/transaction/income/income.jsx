@@ -85,7 +85,6 @@ const IncomeTransaction = () => {
 
   const { data, isLoading, refetch, error } = useIncomeTransaction(filter);
   const deleteIncomeTransaction = useDeleteIncomeTransaction();
-  console.log("tran", data);
 
   const { mode: theme } = useSelector((state) => state.theme);
 
@@ -139,7 +138,6 @@ const IncomeTransaction = () => {
   };
   const handleDelete = (record) => {
     const id = record.id;
-    console.log(record.id);
     deleteIncomeTransaction.mutate(
       { id },
       {

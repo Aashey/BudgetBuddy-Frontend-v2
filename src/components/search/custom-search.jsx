@@ -3,9 +3,7 @@ import { CiSearch } from "react-icons/ci";
 
 export const CustomSearchWithTitle = ({ setFilteredData, data }) => {
   const handleSearch = (value) => {
-    console.log(value);
     const formattedKeySearch = value.toLowerCase();
-    console.log(data?.data?.data);
     const searchData = data?.data?.data.filter((item) =>
       item.title.toLowerCase().includes(formattedKeySearch)
     );
@@ -27,9 +25,7 @@ export const CustomSearchWithTitle = ({ setFilteredData, data }) => {
 
 export const CustomSearchWithCategory = ({ setFilteredData, data }) => {
   const handleSearch = (value) => {
-    console.log(value);
     const formattedKeySearch = value.toLowerCase();
-    console.log(data?.data?.data);
     const searchData = data?.data?.data.filter((item) =>
       item.category_title.toLowerCase().includes(formattedKeySearch)
     );
@@ -51,9 +47,7 @@ export const CustomSearchWithCategory = ({ setFilteredData, data }) => {
 
 export const CustomSearchWithTransaction = ({ setFilteredData, data }) => {
   const handleSearch = (value) => {
-    console.log(value);
     const formattedKeySearch = value.toLowerCase();
-    console.log(data?.data);
     const searchData = data?.data?.filter((item) =>
       item.transaction_type.toLowerCase().includes(formattedKeySearch)
     );

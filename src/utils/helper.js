@@ -57,8 +57,12 @@ export const getMonthName = (monthNumber) => {
 };
 
 export const percentageConversion = (num1, num2) => {
-  const res1 = num1 / num2;
-  return (100 / res1).toFixed(2);
+  if (num1 && num2) {
+    const res1 = num1 / num2;
+    return (100 / res1).toFixed(2);
+  } else {
+    return 0;
+  }
 };
 
 export const getToday = () => {

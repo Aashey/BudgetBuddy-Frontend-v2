@@ -84,15 +84,11 @@ const Dashboard = () => {
     total_withdraw: withdrawChange = 0,
   } = dashboardData?.data?.financial_data?.percentage_changes || {};
 
-  // datas for charts
-
   // saving goal functionality
   const percentageChange = percentageConversion(
     dashboardData?.data?.financial_data?.current_month_goal,
     dashboardData?.data?.financial_data?.current_month?.total_saving
   );
-
-  console.log(dashboardData);
 
   // Datas for cards
   const cards = [

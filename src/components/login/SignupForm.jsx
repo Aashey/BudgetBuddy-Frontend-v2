@@ -19,7 +19,6 @@ const SignupForm = () => {
   const { mutate: registerMutation, isLoading } = useRegisterUser();
 
   const onFinish = (values) => {
-    console.log(values);
     const { username, email, password, password_confirmation } = values;
     registerMutation(
       { username, email, password, password_confirmation },

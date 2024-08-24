@@ -138,7 +138,6 @@ const ExpenseTransaction = () => {
   };
   const handleDelete = (record) => {
     const id = record.id;
-    console.log(record.id);
     deleteExpenseTransaction.mutate(
       { id },
       {

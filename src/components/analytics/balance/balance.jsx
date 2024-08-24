@@ -7,7 +7,6 @@ import BalanceTable from "./balance-table";
 const BalanceAnalytics = () => {
   const { data, isLoading, isError } = useBalanceData();
   const balanceData = data?.data || {};
-  console.log("balad1", balanceData);
 
   const cardData = balanceData[balanceData.length - 1] || {};
 

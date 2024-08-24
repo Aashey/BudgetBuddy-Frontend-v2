@@ -11,7 +11,6 @@ const CashFlowAnalytics = () => {
   const currentChartData = data?.data?.charts?.current_total_by_category;
   const overallChartData = data?.data?.charts?.overall_total_by_category;
 
-  console.log(data);
   const currentExpenseData = currentChartData?.expense_totals;
   const currentIncomeData = currentChartData?.income_totals;
   const overallExpenseData = overallChartData?.expense_totals;

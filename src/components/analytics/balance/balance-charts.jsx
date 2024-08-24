@@ -10,12 +10,9 @@ const BalanceCharts = () => {
   const { data, isLoading, isError } = useBalanceChart();
 
   const chartData = data?.data || {};
-  console.log("chart", chartData);
   const openingData = chartData?.balance_chart?.opening_balance || [];
   const closingData = chartData?.balance_chart?.closing_balance || [];
 
-  console.log("opening", openingData);
-  console.log("closing", closingData);
   const [chartType, setChartType] = useState("line");
 
   const incomeExpenseSeries = useMemo(

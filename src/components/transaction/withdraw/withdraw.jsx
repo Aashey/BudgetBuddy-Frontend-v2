@@ -72,8 +72,6 @@ const WithdrawTransaction = () => {
   const { data, isLoading, refetch, error } = useWithdrawTransaction(filter);
   const deleteWithdrawTransaction = useDeleteWithdrawTransaction();
 
-  console.log("tran", data);
-
   const { mode: theme } = useSelector((state) => state.theme);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -126,7 +124,6 @@ const WithdrawTransaction = () => {
   };
   const handleDelete = (record) => {
     const id = record.id;
-    console.log(record.id);
     deleteWithdrawTransaction.mutate(
       { id },
       {

@@ -69,7 +69,6 @@ const TransactionHistory = () => {
   ];
 
   const { data, isLoading, refetch, error } = useGetTransaction(filter);
-  console.log("tran", data);
 
   const { mode: theme } = useSelector((state) => state.theme);
 

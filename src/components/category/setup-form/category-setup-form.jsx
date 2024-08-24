@@ -37,8 +37,6 @@ const CategorySetupForm = ({
   const { mode: theme } = useSelector((state) => state.theme);
   const [form] = Form.useForm();
   const { Title, Text } = Typography;
-  console.log("Mode", mode);
-  console.log("Type", type);
   const [loading, setLoading] = useState(false);
 
   const handleMutationSuccess = () => {
@@ -58,7 +56,6 @@ const CategorySetupForm = ({
   };
 
   const OnFinish = (values) => {
-    console.log(values);
     setLoading(true);
     const categoryMap = {
       income: {
