@@ -69,6 +69,9 @@ const TransactionHistory = () => {
   ];
 
   const { data, isLoading, refetch, error } = useGetTransaction(filter);
+  const transactionHistoryData = {
+    data: data,
+  };
 
   const { mode: theme } = useSelector((state) => state.theme);
 
@@ -120,7 +123,7 @@ const TransactionHistory = () => {
       <span className="flex justify-between items-center mt-4 mb-4">
         <span className="flex justify-between gap-4">
           <CustomSearchWithTransaction
-            data={data?.data}
+            data={transactionHistoryData?.data}
             setFilteredData={setFilteredData}
           />
           <FilterDate setFilter={setFilter} />
@@ -133,7 +136,7 @@ const TransactionHistory = () => {
             columnName={transactionHistoryColumn}
             checkedList={checkedList}
             filteredData={filteredData}
-            data={data}
+            data={transactionHistoryData}
           />
 
           <ColumnMenu
@@ -157,7 +160,9 @@ const TransactionHistory = () => {
           scroll={{
             y: 280,
           }}
-          dataSource={!error ? filteredData ?? data?.data?.data : []}
+          dataSource={
+            !error ? filteredData ?? transactionHistoryData?.data?.data : []
+          }
           columns={newColumns}
         />
       </Card>
