@@ -8,7 +8,7 @@ const getTransaction = async ({ queryKey }) => {
     : "";
   const url = `/transaction/get-transactions${filterRange}`;
   const response = await apiClient.get(url);
-  return response.data;
+  return response;
 };
 
 export const useGetTransaction = (queryParams) => {

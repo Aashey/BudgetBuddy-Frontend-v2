@@ -182,7 +182,6 @@ const IncomeTransaction = () => {
           <CustomSearchWithCategory
             data={data}
             setFilteredData={setFilteredData}
-            searchName={"title"}
           />
           <FilterDate setFilter={setFilter} />
         </span>

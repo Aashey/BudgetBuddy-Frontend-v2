@@ -120,9 +120,8 @@ const TransactionHistory = () => {
       <span className="flex justify-between items-center mt-4 mb-4">
         <span className="flex justify-between gap-4">
           <CustomSearchWithTransaction
-            data={data}
+            data={data?.data}
             setFilteredData={setFilteredData}
-            searchName={"title"}
           />
           <FilterDate setFilter={setFilter} />
         </span>
@@ -158,7 +157,7 @@ const TransactionHistory = () => {
           scroll={{
             y: 280,
           }}
-          dataSource={!error ? filteredData ?? data?.data : []}
+          dataSource={!error ? filteredData ?? data?.data?.data : []}
           columns={newColumns}
         />
       </Card>
